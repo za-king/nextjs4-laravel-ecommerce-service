@@ -17,6 +17,8 @@ class ReviewController extends Controller
 
         $review = new Review($data);
 
+        $review->save();
+
         return new ReviewResource($review);
 
     }

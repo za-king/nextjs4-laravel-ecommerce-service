@@ -54,4 +54,17 @@ class ProductController extends Controller
         return response()->json(["message" => "product deleted"], 202);
 
     }
+
+    public function getByIdProduct(Request $request, $id)
+    {
+        $check = Product::where("id", $id)->exists();
+
+        if (!$check) {
+            return response()->json(["message" => "product not found"]);
+        }
+
+        $product = Product::with("reviews")->find($id);
+
+        return response()->json(["data" => $product]);
+    }
 }

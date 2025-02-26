@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,5 +35,8 @@ Route::middleware("auth:sanctum")->group(function () {
     //PRODUCTS
     Route::post("/products/add", [ProductController::class, "addProduct"]);
     Route::get("/products/getAll", [ProductController::class, "getAllProduct"]);
+    Route::get("/products/getById/{id}", [ProductController::class, "getByIdProduct"]);
     Route::delete("/products/remove/{id}", [ProductController::class, "removeProduct"]);
+    //REVIEWS
+    Route::post("/reviews/add", [ReviewController::class, "addReview"]);
 });
