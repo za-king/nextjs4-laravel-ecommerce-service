@@ -108,4 +108,13 @@ class UserController extends Controller
 
         return response()->json(["data" => $User]);
     }
+
+    public function me(Request $request)
+    {
+        $user = $request->user()->load('carts.products')->load("reviews");// Load cart & product
+
+        return response()->json([
+            'user' => $user
+        ]);
+    }
 }

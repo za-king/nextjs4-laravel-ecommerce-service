@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
@@ -24,8 +25,11 @@ Route::post('/users/refresh-token', [UserController::class, 'refreshToken']);
 
 
 Route::middleware("auth:sanctum")->group(function () {
+    //USERS
     Route::post("/users/logout", [UserController::class, "logout"]);
     Route::get("/users/getAll", [UserController::class, "getAll"]);
+    Route::middleware('auth:sanctum')->get("/users/me", [UserController::class, 'me']);
+
 
     //CATEGORIES
     Route::post("/categories/add", [CategoryController::class, "addCategory"]);
@@ -39,4 +43,6 @@ Route::middleware("auth:sanctum")->group(function () {
     Route::delete("/products/remove/{id}", [ProductController::class, "removeProduct"]);
     //REVIEWS
     Route::post("/reviews/add", [ReviewController::class, "addReview"]);
+    //CARTS
+    Route::post("/carts/add", [CartController::class, "addCart"]);
 });
